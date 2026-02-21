@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import {
   PhoneCall,
   Menu,
@@ -75,12 +75,16 @@ const services = [
 ]
 
 import logo from './assets/logo.png'
+import heroBg from './assets/hero-bg.png'
 import expertImg from './assets/expert.png'
 import mapImg from './assets/duesseldorfkarte.jpg'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null)
+
+  const { scrollY } = useScroll()
+  const heroY = useTransform(scrollY, [0, 1000], ['0%', '30%'])
 
   return (
     <div className="min-h-screen" id="top">
@@ -159,8 +163,20 @@ function App() {
       </header>
 
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden hero-pattern">
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
+        <motion.div
+          className="absolute inset-x-0 -top-[20%] z-0 h-[140%] w-full"
+          style={{ y: heroY }}
+        >
+          <img
+            src={heroBg}
+            alt="Hero Background"
+            className="w-full h-full object-cover object-top"
+          />
+        </motion.div>
+        <div className="absolute inset-0 z-10 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.87))' }} />
+
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 mt-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
