@@ -63,7 +63,7 @@
   }
 
   .hero-pattern {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.97)), url('./assets/hero-bg.png');
+    background-image: linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.87)), url('./assets/hero-bg.png');
     background-size: cover;
     background-position: center;
   }
