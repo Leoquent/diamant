@@ -90,7 +90,7 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" id="top">
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-6 right-6 z-50 md:hidden">
         <motion.a
@@ -107,18 +107,20 @@ function App() {
       <header className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled ? 'glass-effect border-b border-gray-100' : 'bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-36">
-            <div className="flex items-center">
+            <a href="#top" className="flex items-center">
               <img
-                className="h-24 w-auto"
+                className="h-24 w-auto cursor-pointer"
                 src={logo}
                 alt="Schlüsseldienst Diamant Logo"
               />
-            </div>
+            </a>
 
             <nav className="hidden md:flex items-center gap-8">
               <a href="#leistungen" className="text-sm font-semibold text-gray-600 hover:text-primary transition-colors">Leistungen</a>
               <a href="#preise" className="text-sm font-semibold text-gray-600 hover:text-primary transition-colors">Preise</a>
               <a href="#über-uns" className="text-sm font-semibold text-gray-600 hover:text-primary transition-colors">Über uns</a>
+              <a href="#faq" className="text-sm font-semibold text-gray-600 hover:text-primary transition-colors">FAQ</a>
+              <a href="#kontakt" className="text-sm font-semibold text-gray-600 hover:text-primary transition-colors">Kontakt</a>
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -151,6 +153,8 @@ function App() {
                 <a href="#leistungen" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Leistungen</a>
                 <a href="#preise" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Preise</a>
                 <a href="#über-uns" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Über uns</a>
+                <a href="#faq" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">FAQ</a>
+                <a href="#kontakt" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Kontakt</a>
                 <a href="tel:021194256907" className="flex items-center gap-2 bg-primary text-white p-4 rounded-xl font-bold">
                   <PhoneCall size={20} />
                   Jetzt anrufen: 0211 94256907
@@ -440,7 +444,7 @@ function App() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white scroll-mt-40" id="faq">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold text-center mb-12">Häufig gestellte Fragen</h2>
           <div className="space-y-4">
@@ -474,7 +478,7 @@ function App() {
       </section>
 
       {/* Contact */}
-      <section className="py-24 bg-background-offset relative">
+      <section className="py-24 bg-background-offset relative scroll-mt-40" id="kontakt">
         <div className="diamond-pattern absolute inset-0"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="bg-white rounded-3xl overflow-hidden shadow-xl flex flex-col lg:flex-row border border-gray-100">
