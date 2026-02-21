@@ -82,6 +82,8 @@ import mapImg from './assets/duesseldorfkarte.jpg'
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null)
+  const [isImpressumOpen, setIsImpressumOpen] = useState(false)
+  const [isDatenschutzOpen, setIsDatenschutzOpen] = useState(false)
 
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 1000], ['0%', '30%'])
@@ -261,6 +263,103 @@ function App() {
         service={selectedService}
         onClose={() => setSelectedService(null)}
       />
+
+      <LegalModal
+        isOpen={isImpressumOpen}
+        onClose={() => setIsImpressumOpen(false)}
+        title="Impressum"
+      >
+        <div className="space-y-6 text-gray-700">
+          <section>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">Angaben gemäß §5 TMG</h4>
+            <p className="font-bold text-lg text-text-main">Schlüsseldienst-Diamant Düsseldorf</p>
+            <p className="mt-1">
+              Kanzlerstraße 27<br />
+              40472 Düsseldorf
+            </p>
+          </section>
+
+          <section>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">Kontakt</h4>
+            <p>
+              <span className="font-semibold">Telefon:</span> 015792453300<br />
+              <span className="font-semibold">Email:</span> ae@schlüsseldienst-diamant-düsseldorf.de
+            </p>
+          </section>
+
+          <section>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h4>
+            <p>
+              Ali Elbukaev<br />
+              Kanzlerstraße 27<br />
+              40472 Düsseldorf
+            </p>
+          </section>
+
+          <section className="pt-6 border-t border-gray-100">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">EU-Streitschlichtung</h4>
+            <p className="text-sm">
+              Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+              <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
+                https://ec.europa.eu/consumers/odr/
+              </a>.
+              <br />Unsere E-Mail-Adresse finden Sie oben im Impressum.
+            </p>
+          </section>
+
+          <section>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-secondary mb-3">Verbraucherstreitbeilegung/Universalschlichtungsstelle</h4>
+            <p className="text-sm">
+              Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+            </p>
+          </section>
+        </div>
+      </LegalModal>
+
+      <LegalModal
+        isOpen={isDatenschutzOpen}
+        onClose={() => setIsDatenschutzOpen(false)}
+        title="Datenschutz"
+      >
+        <div className="space-y-6 text-gray-700">
+          <section>
+            <h2 className="text-xl font-bold mb-4">Datenschutzerklärung</h2>
+            <p className="mb-4">
+              Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer Privatsphäre ist für uns sehr wichtig.
+              Nachstehend informieren wir Sie ausführlich über den Umgang mit Ihren Daten.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="font-bold text-lg mb-2">1. Zugriffsdaten und Hosting</h3>
+            <p className="text-sm leading-relaxed">
+              Sie können unsere Webseiten besuchen, ohne Angaben zu Ihrer Person zu machen. Bei jedem Aufruf einer Webseite speichert
+              der Webserver lediglich automatisch ein sogenanntes Server-Logfile, das z.B. den Namen der angeforderten Datei,
+              Ihre IP-Adresse, Datum und Uhrzeit des Abrufs, übertragene Datenmenge und den anfragenden Provider (Zugriffsdaten)
+              enthält und den Abruf dokumentiert. Diese Zugriffsdaten werden ausschließlich zum Zwecke der Sicherstellung eines
+              störungsfreien Betriebs der Seite sowie der Verbesserung unseres Angebots ausgewertet.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="font-bold text-lg mb-2">2. Datenerhebung und Verwendung zur Vertragsabwicklung</h3>
+            <p className="text-sm leading-relaxed">
+              Wir erheben personenbezogene Daten, wenn Sie uns diese im Rahmen Ihrer Kontaktaufnahme (z.B. per Kontaktformular oder E-Mail)
+              freiwillig mitteilen. Welche Daten erhoben werden, ist aus den jeweiligen Eingabeformularen ersichtlich. Wir verwenden
+              die von Ihnen mitgeteilten Daten zur Vertragsabwicklung und Bearbeitung Ihrer Anfragen.
+            </p>
+          </section>
+
+          <section>
+            <h3 className="font-bold text-lg mb-2">3. Ihre Rechte</h3>
+            <p className="text-sm leading-relaxed">
+              Sie haben ein Recht auf unentgeltliche Auskunft über die bei uns zu Ihrer Person gespeicherten Daten sowie ggf. ein
+              Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Bei Fragen zur Erhebung, Verarbeitung oder Nutzung Ihrer
+              personenbezogenen Daten wenden Sie sich bitte an uns.
+            </p>
+          </section>
+        </div>
+      </LegalModal>
 
       {/* Prices */}
       <section className="py-24 bg-white scroll-mt-40" id="preise">
@@ -556,10 +655,10 @@ function App() {
             <div>
               <h4 className="font-bold mb-6 uppercase tracking-widest text-xs">Links</h4>
               <ul className="space-y-4 text-sm text-secondary">
-                <li><a href="#" className="hover:text-primary transition-colors">Impressum</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Datenschutz</a></li>
+                <li><button onClick={() => setIsImpressumOpen(true)} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-secondary text-left w-full">Impressum</button></li>
+                <li><button onClick={() => setIsDatenschutzOpen(true)} className="hover:text-primary transition-colors cursor-pointer bg-transparent border-none p-0 text-secondary text-left w-full">Datenschutz</button></li>
                 <li><a href="#preise" className="hover:text-primary transition-colors">Preise</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
+                <li><a href="#faq" className="hover:text-primary transition-colors">FAQ</a></li>
               </ul>
             </div>
             <div>
@@ -765,6 +864,63 @@ function AccordionItem({ question, answer, isOpen = false }: { question: string,
         )}
       </AnimatePresence>
     </div>
+  )
+}
+
+function LegalModal({ isOpen, onClose, title, children }: { isOpen: boolean, onClose: () => void, title: string, children: React.ReactNode }) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ backdropFilter: 'blur(0px)', opacity: 0 }}
+            animate={{ backdropFilter: 'blur(8px)', opacity: 1 }}
+            exit={{ backdropFilter: 'blur(0px)', opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 bg-black/40"
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto z-10"
+          >
+            <div className="h-1.5 bg-primary rounded-t-3xl" />
+            <button
+              onClick={onClose}
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors cursor-pointer z-10"
+              aria-label="Schließen"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="p-8 md:p-10">
+              <h3 className="text-2xl md:text-3xl font-extrabold mb-8" style={{ color: '#4F504B' }}>{title}</h3>
+              {children}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
