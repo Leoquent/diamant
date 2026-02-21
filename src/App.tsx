@@ -105,10 +105,10 @@ function App() {
       {/* Header */}
       <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-36">
+          <div className="flex justify-between items-center h-24 md:h-36">
             <a href="#top" className="flex items-center">
               <img
-                className="h-24 w-auto cursor-pointer"
+                className="h-16 md:h-24 w-auto cursor-pointer"
                 src={logo}
                 alt="Schlüsseldienst Diamant Logo"
               />
@@ -223,9 +223,9 @@ function App() {
       </section>
 
       {/* Trust Badges */}
-      <section className="bg-white border-y border-gray-100">
+      <section className="bg-white border-y border-gray-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             <FeatureBadge icon={<Clock />} title="24/7 Service" subtitle="Tag & Nacht bereit" />
             <FeatureBadge icon={<ShieldCheck />} title="Festpreisgarantie" subtitle="Keine Abzocke" />
             <FeatureBadge icon={<Wrench />} title="Ohne Schäden" subtitle="Profi-Werkzeuge" />
@@ -243,7 +243,7 @@ function App() {
             <p className="mt-6 text-secondary max-w-2xl mx-auto text-lg">Professionelle Sicherheitslösungen für Privat- und Gewerbekunden in Düsseldorf.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {services.map((s) => (
               <ServiceCard
                 key={s.id}
@@ -684,13 +684,13 @@ function App() {
 
 function FeatureBadge({ icon, title, subtitle }: { icon: any, title: string, subtitle: string }) {
   return (
-    <div className="flex items-center gap-4 group cursor-default">
-      <div className="w-14 h-14 rounded-full bg-background-offset flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-200">
-        <div className="scale-110">{icon}</div>
+    <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-2 sm:gap-4 group cursor-default">
+      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-background-offset flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-200 shrink-0">
+        <div className="scale-90 sm:scale-110">{icon}</div>
       </div>
-      <div>
-        <p className="text-sm font-bold uppercase tracking-tight">{title}</p>
-        <p className="text-xs text-secondary mt-0.5">{subtitle}</p>
+      <div className="min-w-0">
+        <p className="text-[10px] sm:text-sm font-bold uppercase tracking-tight break-words">{title}</p>
+        <p className="text-[9px] sm:text-xs text-secondary mt-0.5">{subtitle}</p>
       </div>
     </div>
   )
@@ -700,13 +700,13 @@ function ServiceCard({ icon, title, desc, materialIcon, onDetails }: { icon: any
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="bg-white p-8 rounded-2xl border border-transparent hover:border-primary/20 transition-all duration-200 group shadow-sm hover:shadow-xl cursor-default flex flex-col"
+      className="bg-white p-4 sm:p-8 rounded-2xl border border-transparent hover:border-primary/20 transition-all duration-200 group shadow-sm hover:shadow-xl cursor-default flex flex-col"
     >
-      <div className="w-16 h-16 bg-background-offset rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
+      <div className="w-12 h-12 sm:w-16 sm:h-16 bg-background-offset rounded-xl flex items-center justify-center text-primary mb-4 sm:mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
         {materialIcon ? <span className="material-symbols-outlined text-3xl">{materialIcon}</span> : <div className="scale-125">{icon}</div>}
       </div>
-      <h3 className="text-xl font-bold mb-3">{title}</h3>
-      <p className="text-secondary text-sm leading-relaxed mb-6 flex-1">{desc}</p>
+      <h3 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">{title}</h3>
+      <p className="text-secondary text-[11px] sm:text-sm leading-relaxed mb-4 sm:mb-6 flex-1 line-clamp-3 sm:line-clamp-none">{desc}</p>
       <button
         onClick={onDetails}
         className="text-primary font-bold text-sm flex items-center gap-2 group/btn cursor-pointer bg-transparent border-none p-0"
