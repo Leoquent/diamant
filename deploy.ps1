@@ -1,6 +1,6 @@
 # deploy.ps1
 # Build the project
-npx vite build
+npm run build
 if ($LASTEXITCODE -ne 0) { 
     Write-Host "Build failed!" -ForegroundColor Red
     exit $LASTEXITCODE 
