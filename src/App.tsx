@@ -85,8 +85,8 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Start fade at 40% viewport height and finish at 85% viewport height
-      const startFade = window.innerHeight * 0.4
+      // Start fade immediately at 0 and finish at 85% viewport height (just before the white badges)
+      const startFade = 0
       const endFade = window.innerHeight * 0.85
       const progress = Math.max(0, Math.min((window.scrollY - startFade) / (endFade - startFade), 1))
       setScrollProgress(progress)
