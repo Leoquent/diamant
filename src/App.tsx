@@ -89,7 +89,7 @@ function App() {
   const heroY = useTransform(scrollY, [0, 1000], ['0%', '30%'])
 
   return (
-    <div className="min-h-screen" id="top">
+    <div className="min-h-screen overflow-x-hidden" id="top">
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-6 right-6 z-50 md:hidden">
         <motion.a
@@ -103,12 +103,12 @@ function App() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm">
+      <header className="relative z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm overflow-visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-24 md:h-36">
+          <div className="flex justify-between items-center h-28 md:h-36">
             <a href="#top" className="flex items-center">
               <img
-                className="h-16 md:h-24 w-auto cursor-pointer"
+                className="h-18 md:h-24 w-auto cursor-pointer"
                 src={logo}
                 alt="Schlüsseldienst Diamant Logo"
               />
@@ -430,7 +430,7 @@ function App() {
                 src={expertImg}
                 alt="Expert"
               />
-              <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-2xl shadow-xl z-20 border-t-4 border-primary">
+              <div className="absolute -bottom-8 -right-4 sm:-right-8 bg-white p-6 sm:p-8 rounded-2xl shadow-xl z-20 border-t-4 border-primary">
                 <div className="flex items-center gap-4">
                   <div className="text-5xl font-black text-primary">10+</div>
                   <div className="text-sm font-bold uppercase leading-tight">Jahre Erfahrung<br />in Düsseldorf</div>
