@@ -80,20 +80,7 @@ import mapImg from './assets/duesseldorfkarte.jpg'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [scrollProgress, setScrollProgress] = useState(0)
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Start fade immediately at 0 and finish at 85% viewport height (just before the white badges)
-      const startFade = 0
-      const endFade = window.innerHeight * 0.85
-      const progress = Math.max(0, Math.min((window.scrollY - startFade) / (endFade - startFade), 1))
-      setScrollProgress(progress)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <div className="min-h-screen" id="top">
@@ -110,15 +97,7 @@ function App() {
       </div>
 
       {/* Header */}
-      <header
-        className="fixed top-0 z-40 w-full transition-all duration-200"
-        style={{
-          backgroundColor: `rgba(255, 255, 255, ${scrollProgress * 0.97})`,
-          backdropFilter: `blur(${scrollProgress * 16}px)`,
-          WebkitBackdropFilter: `blur(${scrollProgress * 16}px)`,
-          borderBottom: scrollProgress > 0.5 ? `1px solid rgba(229, 231, 235, ${(scrollProgress - 0.5) * 2})` : 'none',
-        }}
-      >
+      <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-36">
             <a href="#top" className="flex items-center">
