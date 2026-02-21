@@ -111,7 +111,7 @@ function App() {
 
       {/* Header */}
       <header
-        className="sticky top-0 z-40 w-full transition-all duration-200"
+        className="fixed top-0 z-40 w-full transition-all duration-200"
         style={{
           backgroundColor: `rgba(255, 255, 255, ${scrollProgress * 0.97})`,
           backdropFilter: `blur(${scrollProgress * 16}px)`,
