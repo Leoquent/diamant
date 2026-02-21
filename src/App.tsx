@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import {
   PhoneCall,
@@ -88,8 +88,17 @@ function App() {
   const { scrollY } = useScroll()
   const heroY = useTransform(scrollY, [0, 1000], ['0%', '30%'])
 
+  const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    setIsMenuOpen(false)
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <div className="min-h-screen overflow-x-hidden" id="top">
+    <div className="min-h-screen overflow-clip" id="top">
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-6 right-6 z-50 md:hidden">
         <motion.a
@@ -103,7 +112,7 @@ function App() {
       </div>
 
       {/* Header */}
-      <header className="relative z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm overflow-visible">
+      <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white border-b border-gray-100 shadow-sm overflow-visible">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-28 md:h-36">
             <a href="#top" className="flex items-center">
@@ -149,11 +158,11 @@ function App() {
               className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
             >
               <div className="px-4 py-6 space-y-4">
-                <a href="#leistungen" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Leistungen</a>
-                <a href="#preise" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Preise</a>
-                <a href="#über-uns" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Über uns</a>
-                <a href="#faq" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">FAQ</a>
-                <a href="#kontakt" onClick={() => setIsMenuOpen(false)} className="block text-lg font-semibold text-gray-600">Kontakt</a>
+                <a href="#leistungen" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleScrollToSection(e, 'leistungen')} className="block text-lg font-semibold text-gray-600">Leistungen</a>
+                <a href="#preise" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleScrollToSection(e, 'preise')} className="block text-lg font-semibold text-gray-600">Preise</a>
+                <a href="#über-uns" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleScrollToSection(e, 'über-uns')} className="block text-lg font-semibold text-gray-600">Über uns</a>
+                <a href="#faq" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleScrollToSection(e, 'faq')} className="block text-lg font-semibold text-gray-600">FAQ</a>
+                <a href="#kontakt" onClick={(e: React.MouseEvent<HTMLAnchorElement>) => handleScrollToSection(e, 'kontakt')} className="block text-lg font-semibold text-gray-600">Kontakt</a>
                 <a href="tel:021194256907" className="flex items-center gap-2 bg-primary text-white p-4 rounded-xl font-bold">
                   <PhoneCall size={20} />
                   Jetzt anrufen: 0211 94256907
@@ -490,27 +499,28 @@ function App() {
             <p className="text-secondary">Verifiziert auf Google Maps · Düsseldorf</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
+          <div className="flex overflow-x-auto gap-4 sm:gap-6 pt-4 pb-8 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            <style>{`.hide-scrollbar::-webkit-scrollbar { display: none; }`}</style>
+            {Array(3).fill([
               { name: 'Jiena Viduka', time: 'vor 4 Monaten', stars: 5, text: 'Absolut freundlicher und schneller Schlüsseldienst. Transparenz beim Preis direkt am Telefon & dieser war mehr als fair, dafür, dass ich innerhalb 15 Minuten jemanden bei mir hatte der die Tür problemlos öffnen konnte.' },
               { name: 'luna moon', time: 'vor 6 Monaten', stars: 5, text: 'Top Schlüsseldienst alleine am Telefon bereits mir eine Preisvorstellung genannt die mehr als angebracht ist für die Dienste. Keine Anfahrtspauschale, wie es sonst fast jeder nimmt. Der Herr war auf die Minute pünktlich und hat echt super Arbeit geleistet.' },
               { name: 'Mohammed Jaber', time: 'vor 4 Monaten', stars: 5, text: 'Sehr guter und schneller zuverlässiger Service zum Fairen Preis. Absolute Weiterempfehlung. Düsseldorf Rath' },
               { name: 'Chari', time: 'vor 11 Monaten', stars: 5, text: 'Top Service. Sehr kompetent und Schnell war nach 10 Minuten schon da obwohl gesagt wurde 20 Minuten dauerts. Ali hatte die Tür in Null Komma nichts offen und war sehr nett dabei. Dafür dass es schon Abends war lobenswert. Alles in allem Top Firma' },
               { name: 'Julian Brassel', time: 'vor 8 Monaten', stars: 5, text: 'Sensationeller Service! Mieter hatte Problem mit der Wohnungstür. 49 Minuten nach dem Erstgespräch wurden wie Schlösser ausgetauscht und der Schaden behoben. Preis absolut fair!' },
               { name: 'Enrico Correia Lé', time: 'vor einem Jahr', stars: 5, text: 'Schnell und Freundlich! und dabei noch günstiger als die Mitbewerber. Der Mitarbeiter „Ali" kam nach 10 Minuten schon an und konnte mir sofort helfen. Dabei war er sehr freundlich und Respektvoll.' },
-            ].map((review, i) => (
+            ]).flat().map((review, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200 flex flex-col gap-4"
+                transition={{ delay: (i % 6) * 0.1 }}
+                className="w-[85vw] sm:w-[350px] shrink-0 snap-center bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 flex flex-col gap-4 whitespace-normal"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center font-bold text-primary text-sm flex-shrink-0">
-                      {review.name.split(' ').map(n => n[0]).join('')}
+                      {review.name.split(' ').map((n: string) => n[0]).join('')}
                     </div>
                     <div>
                       <p className="font-semibold text-sm" style={{ color: '#4F504B' }}>{review.name}</p>
